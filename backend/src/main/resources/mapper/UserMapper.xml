@@ -6,4 +6,7 @@
     <select id="getUserByUsername" resultType="User">
         select * from user where username = #{username};
     </select>
+    <insert id="insert">
+        insert into user(username, password, nickname, status, admin) value (#{username}, #{password}, '未设置昵称', 0, 1);
+    </insert>
 </mapper>

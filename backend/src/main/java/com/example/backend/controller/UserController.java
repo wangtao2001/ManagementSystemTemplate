@@ -31,4 +31,9 @@ public class UserController {
         }
         return result;
     }
+
+    @PostMapping("/register")
+    public Result<?> register(@RequestBody User user) {
+        return userService.register(user.getUsername(), user.getPassword());
+    }
 }

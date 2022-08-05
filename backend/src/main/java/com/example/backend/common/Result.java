@@ -16,9 +16,15 @@ public class Result<T> {
     public static final String USERNAME_PWD_ERROR = "201";
     public static final String USERNAME_PWD_ERROR_MSG = "用户名或密码错误";
     public static final String USERNAME_REPEAT_ERROR = "202";
-    public static final String USERNAME_REPEAT_ERROR_MSG = "用户名重复";
+    public static final String USERNAME_REPEAT_ERROR_MSG = "用户名已存在";
     public static final String USERNAME_NOTFOUND_ERROR = "203";
     public static final String USERNAME_NOTFOUND_ERROR_MSG = "用户名不存在";
+    public static final String USERNAME_FORMAT_ERROR = "204";
+    public static final String USERNAME_FORMAT_ERROR_MSG = "用户名或密码格式不正确";
+    public static final String USER_ADMIN_ERROR = "205";
+    public static final String USER_ADMIN_ERROR_MSG = "用户没有权限登陆，请联系管理员";
+    public static final String USER_CANCEL_ERROR = "206";
+    public static final String USER_CANCEL_ERROR_MSG = "用户已注销";
 
     private String code;
     private String msg;

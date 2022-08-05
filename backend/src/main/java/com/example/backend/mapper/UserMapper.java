@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
     User getUserByUsername(String username);
+    void insert(String username, String password);
 }
