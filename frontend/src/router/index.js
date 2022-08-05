@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import el from "element-ui/src/locale/lang/el";
 
 Vue.use(VueRouter)
 
@@ -24,14 +25,17 @@ const router = new VueRouter({
 // 路由守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
+  let token = localStorage.getItem('Authorization');
+  let isLogin = !(token === null || token === '');
+  if (to.path === '/login' && !isLogin) { // 去登陆页面，但是没有登陆
     next();
-  } else {
-    let token = localStorage.getItem('Authorization');
-    if (token === null || token === '') {
-      next('/login');
-    } else {
+  } else if (to.path === '/login' && isLogin) { // 去登陆页面，但是已经登陆
+    next('/');
+  } else { // 其他页面
+    if (isLogin) { // 已经登陆
       next();
+    } else { // 没有登陆
+        next('/login');
     }
   }
 });

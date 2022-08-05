@@ -42,13 +42,18 @@ export default {
         url: '/api/user/login',
         data:this.form
       }).then(res => {
-        console.log(res.data);
-        this.userToken = 'Bearer ' + res.data.token;
-        // 将用户token保存到vuex中
-        this.changeLogin({ Authorization:this.userToken });
-        this.$router.push('/');
-      }).catch(err => {
-        console.log("err",err);
+        res = res.data
+        if (res.code === "200") {
+          this.userToken = 'Bearer ' + res.data.token;
+          // 将用户token保存到vuex中
+          this.changeLogin({ Authorization:this.userToken });
+          this.$router.push('/');
+          this.$message.success("登录成功")
+        } else {
+          // 相应提示
+          this.form.password = ''
+          this.$message.error(res.msg);
+        }
       })
     }
   },

@@ -17,6 +17,8 @@ public class Result<T> {
     public static final String USERNAME_PWD_ERROR_MSG = "用户名或密码错误";
     public static final String USERNAME_REPEAT_ERROR = "202";
     public static final String USERNAME_REPEAT_ERROR_MSG = "用户名重复";
+    public static final String USERNAME_NOTFOUND_ERROR = "203";
+    public static final String USERNAME_NOTFOUND_ERROR_MSG = "用户名不存在";
 
     private String code;
     private String msg;

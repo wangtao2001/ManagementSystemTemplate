@@ -1,12 +1,10 @@
 <template>
-  <div>
-    首页
-  </div>
+
 </template>
 
 <script>
 export default {
-  name: "Layout"
+  name: "register"
 }
 </script>
 
