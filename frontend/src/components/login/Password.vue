@@ -41,7 +41,7 @@ export default {
       }).then(res => {
         res = res.data
         if (res.code === "200") {
-          this.userToken = 'Bearer ' + res.data.token;
+          this.userToken = res.data.token; // 这里也许可能考虑加盐
           // 将用户token保存到vuex中
           this.changeLogin({ Authorization:this.userToken });
           this.$router.push('/');

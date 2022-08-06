@@ -39,12 +39,23 @@ public class TokenUtil {
     public static boolean verify(String token){
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();
-            DecodedJWT jwt = verifier.verify(token);
-            // logger.info(jwt.getClaim("username").asString());
-            // logger.info(jwt.getExpiresAt());
+            verifier.verify(token);
             return true;
         } catch (Exception e){
             return false;
+        }
+    }
+
+    /**
+     * 返回当前token对应的用户名
+     */
+    public static String getUserName(String token) {
+        try {
+            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();
+            DecodedJWT jwt = verifier.verify(token);
+            return jwt.getClaim("username").asString();
+        } catch (Exception e) {
+            return null;
         }
     }
 }
