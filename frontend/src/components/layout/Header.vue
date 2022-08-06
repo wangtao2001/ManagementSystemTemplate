@@ -46,7 +46,6 @@ export default {
       url: '/api/user/current'
     }).then(res => {
       res = res.data
-      console.log(res)
       if (res.code === "200") {
         this.currentUser = res.data
       }

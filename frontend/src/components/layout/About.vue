@@ -1,5 +1,5 @@
 <template>
-<div>about</div>
+<div>通用后台管理系统模板</div>
 </template>
 
 <script>

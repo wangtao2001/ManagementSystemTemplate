@@ -6,7 +6,29 @@
     <select id="getUserByUsername" resultType="User">
         select * from user where username = #{username};
     </select>
-    <insert id="insert">
+    <insert id="insertByUsername">
         insert into user(username, password, nickname, status, admin) value (#{username}, #{password}, '未设置昵称', 0, 1);
     </insert>
+    <insert id="insertByUser" parameterType="User">
+        insert into user(username, password, nickname, status, admin, age, address, sex, phoneNumber) value (#{username}, #{password}, #{nickname}, 0, #{admin}, #{age}, #{address}, #{sex}, #{phoneNumber});
+    </insert>
+    <select id="get" resultType="User">
+        select * from user
+        <where>
+            <if test="keyword not in {null, ''}"> <!--保证keyword不为空-->
+                nickname like '%${keyword}%'
+            </if>
+            and status = 0; <!--只查询有效用户-->
+        </where>
+    </select>
+    <update id="update" parameterType="User">
+        update user set nickname = #{nickname}, phoneNumber = #{phoneNumber}, admin = #{admin}, sex = #{sex} ,age = #{age}, address = #{address} where id = #{id};
+    </update>
+    <delete id="delete">
+        delete from user where id = #{id};
+    </delete>
 </mapper>
+
+<!--
+在Mybatis中Mapper.xml文件中，如果有sql涉及的模糊查询，中间包含like语句时，只能使用$,不能使用#
+-->

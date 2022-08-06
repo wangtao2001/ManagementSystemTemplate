@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -33,9 +34,32 @@ public class UserController {
         return userService.register(user.getUsername(), user.getPassword());
     }
 
-    @GetMapping("/current") // 获取当前登陆用户
+    @GetMapping("/current") // 获取当前登录用户
     public Result<?> current(@RequestHeader("Authorization") String token) {
         String username = TokenUtil.getUserName(token);
         return userService.getUserByUsername(username);
     }
+
+    @GetMapping("/get") // 模糊查询
+    public Result<?> get(@RequestParam(defaultValue = "") String keyword) {
+        return userService.get(keyword);
+    }
+
+    @PostMapping("/insert")
+    public Result<?> insert(@RequestBody User user) {
+        return userService.insert(user);
+    }
+
+    @PostMapping("/update")
+    public Result<?> update(@RequestBody User user) {
+        return userService.update(user);
+    }
+
+    @PostMapping("/delete")
+    public Result<?> delete(@RequestBody Map<String,Integer> map) {
+        Integer id = map.get("id");
+        return userService.delete(id);
+    }
+
+    // 这里对应多种获取请求参数的方式
 }
