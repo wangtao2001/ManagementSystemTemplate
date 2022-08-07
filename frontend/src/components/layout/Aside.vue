@@ -13,6 +13,7 @@
               <span>系统管理</span>
             </template>
               <el-menu-item index="user">用户管理</el-menu-item>
+              <el-menu-item index="book">书籍管理</el-menu-item>
           </el-submenu>
           <el-menu-item index="about">
             <i class="el-icon-copy-document"></i>

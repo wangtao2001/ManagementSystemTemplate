@@ -9,14 +9,19 @@ const routes = [{
     redirect: '/user',
     component: () => import('@/views/Layout.vue'),
     children: [{
-        path: '/user',
-        name: 'user',
-        component: () => import('@/components/layout/User.vue')
-    },
+            path: '/user',
+            name: 'user',
+            component: () => import('@/components/layout/User.vue')
+        },
         {
             path: '/about',
             name: 'about',
             component: () => import('@/components/layout/About.vue')
+        },
+        {
+            path: '/book',
+            name: 'book',
+            component: () => import('@/components/layout/Book.vue')
         }
     ]
   },
@@ -25,20 +30,21 @@ const routes = [{
     name: 'login',
     component: () => import('@/views/Login.vue'),
     children: [{
-        name: 'password',
-        path: '/',
-        component: () => import('@/components/login/Password.vue'),
-    }, {
-        path: '/login/phone',
-        name: 'phoneNumber',
-        component: () => import('@/components/login/PhoneNumber.vue'),
-    }
+            name: 'password',
+            path: '/',
+            component: () => import('@/components/login/Password.vue'),
+        },
+        {
+            path: '/login/phone',
+            name: 'phoneNumber',
+            component: () => import('@/components/login/PhoneNumber.vue'),
+        }
     ]
   },
     {
-        path: '/register',
-        name: 'register',
-        component: () => import('@/views/Register.vue'),
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/Register.vue'),
     }
 ]
 

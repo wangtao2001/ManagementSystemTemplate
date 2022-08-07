@@ -24,9 +24,9 @@
     <update id="update" parameterType="User">
         update user set nickname = #{nickname}, phoneNumber = #{phoneNumber}, admin = #{admin}, sex = #{sex} ,age = #{age}, address = #{address} where id = #{id};
     </update>
-    <delete id="delete">
-        delete from user where id = #{id};
-    </delete>
+    <update id="delete">
+        update user set status = 1 where id = #{id};
+    </update>
 </mapper>
 
 <!--

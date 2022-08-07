@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.BookMapper">
+    <select id="get" resultType="Book">
+        select * from book
+        <where>
+            <if test="keyword not in {null, ''}"> <!--保证keyword不为空-->
+                bookname like '%${keyword}%'
+            </if>
+            and status = 0; <!--只查询有效书籍-->
+        </where>
+    </select>
+    <update id="delete">
+        update book set status = 1 where id = #{id};
+    </update>
+    <insert id="insert" parameterType="Book">
+        insert into book(bookname, price, author, date, status ) value (#{bookname}, #{price}, #{author}, #{date}, 0);
+    </insert>
+    <update id="update" parameterType="Book">
+        update book set bookname = #{bookname}, price = #{price}, author = #{author}, date = #{date} where id = #{id};
+    </update>
+</mapper>

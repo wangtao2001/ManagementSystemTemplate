@@ -9,7 +9,7 @@
           </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <span @click="logout">退出登陆</span>
+                <span @click="logout">退出登录</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -24,7 +24,7 @@ export default {
   name: "Header",
   methods: {
    logout() {
-     this.$confirm('您需要重新登陆', '正在退出', {
+     this.$confirm('您需要重新登录', '正在退出', {
        confirmButtonText: '确定',
        cancelButtonText: '取消',
        type: 'warning'
