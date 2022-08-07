@@ -12,13 +12,29 @@
       <el-button type="primary" style="margin-left: 10px;" @click="load" size="medium" >查询</el-button>
       <el-button type="primary" style="margin-left: 10px;" size="medium"  @click="clear">重置</el-button>
     </div>
-    <el-table :data="tableData" border style="width: 70%">
+    <el-table
+        :data="tableData"
+        border
+        style="width: 81.5%">
       <el-table-column prop="id" label="ID" width="80" sortable />
-      <el-table-column prop="bookname" label="书名" />
+      <el-table-column prop="bookname" label="书名" width="180" />
       <el-table-column prop="price" label="价格" width="180" />
       <el-table-column prop="author" label="作者" width="180" />
       <el-table-column prop="date" label="出版日期" width="180" />
-      <el-table-column label="操作" width="100" fixed="right">
+      <el-table-column prop="cover" label="封面" width="150" >
+        <template #default="scope">
+          <!--容器内等比例缩放-->
+          <el-image
+              style="width: auto;
+	                  height: auto;
+	                  max-width: 100%;
+	                  max-height: 100%;	"
+              :src="scope.row.cover"
+              :preview-src-list="[scope.row.cover]"> <!--大图预览-->
+          </el-image>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" fixed="right">
         <template #default="scope">
           <el-button type="text" @click="handleEdit(scope.row)">编辑</el-button>
           <el-popconfirm title="确认删除该书籍吗?" @confirm="handleDelete(scope.row)">
@@ -45,7 +61,8 @@
     <el-dialog
         title="提示"
         :visible.sync="dialogVisible"
-        width="30%">
+        width="30%"
+        top="4vh">
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="书名">
           <el-input v-model="form.bookname"></el-input>
@@ -62,6 +79,16 @@
               type="date"
               placeholder="选择日期">
           </el-date-picker>
+        </el-form-item>
+        <el-form-item label="封面">
+          <el-upload
+              action="http://localhost:9090/file/upload"
+              :on-success="fileUploadSuccess"
+              ref="upload"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -88,6 +115,10 @@ export default {
     this.load();
   },
   methods: {
+    // 文件上传成功的回掉
+    fileUploadSuccess(res) {
+      this.form.cover = res.data;
+    },
     // 取消表单
     cancel(){
       this.form = {}
@@ -117,6 +148,7 @@ export default {
     // 新增
     add() {
       this.dialogVisible = true;
+      this.$refs["upload"].clearFiles(); // ref用于快速取元素，清除历史文件列表
     },
     // 提交新增 或 修改
     save() {
@@ -158,6 +190,7 @@ export default {
     handleEdit(row) {
       this.form = row
       this.dialogVisible = true
+      this.$refs["upload"].clearFiles();
     },
     // 删除
     handleDelete(row) {

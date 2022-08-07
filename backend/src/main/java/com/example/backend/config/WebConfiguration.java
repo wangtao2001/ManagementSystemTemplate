@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * 添加token拦截
+ * 添加token拦截/跨域
  */
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
@@ -38,6 +38,8 @@ public class WebConfiguration implements WebMvcConfigurer {
         excludePath.add("/user/register");  //登录
         excludePath.add("/user/login");     //注册
         excludePath.add("/static/**");      //静态资源
+        excludePath.add("/file/upload");    //文件上传
+        excludePath.add("/file/download"); // 文件下载 文件上传下载上三方组件做的，所以不能拦截
 
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")

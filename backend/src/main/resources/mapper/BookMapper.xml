@@ -16,9 +16,9 @@
         update book set status = 1 where id = #{id};
     </update>
     <insert id="insert" parameterType="Book">
-        insert into book(bookname, price, author, date, status ) value (#{bookname}, #{price}, #{author}, #{date}, 0);
+        insert into book(bookname, price, author, date, status, cover ) value (#{bookname}, #{price}, #{author}, #{date}, 0, #{cover});
     </insert>
     <update id="update" parameterType="Book">
-        update book set bookname = #{bookname}, price = #{price}, author = #{author}, date = #{date} where id = #{id};
+        update book set bookname = #{bookname}, price = #{price}, author = #{author}, date = #{date}, cover = #{cover} where id = #{id};
     </update>
 </mapper>
